@@ -1,0 +1,43 @@
+.log
+{
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 250px;
+
+}
+
+label
+{
+    display: block;
+    text-align: left;
+    padding: 2px;
+    margin-bottom: 1px;
+    font-weight: bold;
+}
+
+input,select
+{
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 5px;
+    margin: -5px;
+    /* margin-bottom: 20px; */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button
+{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+}

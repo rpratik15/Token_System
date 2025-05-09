@@ -1,0 +1,29 @@
+Remove existing git initialization: cd frontend rm -rf .git
+
+Then go to the backend directory and do the same:
+
+cd ../backend rm -rf .git
+
+Navigate to main folder:
+
+cd ..
+
+Initialize a New Git Repository:
+
+git init
+
+Add Both Folders to the Repository:
+
+git add frontend backend
+
+Commit the Changes:
+
+git commit -m "Add frontend and backend folders"
+
+Connect to GitHub Repository:
+git branch -M main
+git remote add origin https://github.com/rpratik15/Token_System.git
+
+Push the Changes to GitHub:
+
+git push -u origin main

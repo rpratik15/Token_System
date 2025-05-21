@@ -1,38 +1,36 @@
-.log
-{
+@media screen and (min-width: 900px) {
+  .log {
     background-color: #f0f0f0;
     /* padding: 10px; */
     border-radius: 5px;
-   box-shadow: 1px 6px 15px rgba(113, 133, 133, 0.1);
+    box-shadow: 1px 6px 15px rgba(113, 133, 133, 0.1);
     margin: 0 auto;
     width: 300px;
-    
 
-}
 
-label
-{
+  }
+
+  label {
     display: block;
     text-align: left;
     padding: 5px 15px;
     margin-bottom: 1px;
     font-weight: bold;
-}
+  }
 
-input,select
-{
+  input,
+  select {
     /* display: block;
     text-align: left; */
-    width: 95% ;
+    width: 95%;
     padding: 8px;
 
 
     border: 1px solid #ccc;
     border-radius: 6px;
-}
+  }
 
-button
-{
+  button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 15px;
@@ -41,17 +39,20 @@ button
     cursor: pointer;
     font-size: 16px;
     margin: 10px;
+  }
+
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -60,6 +61,7 @@ button
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -77,4 +79,47 @@ button
 
 .read-the-docs {
   color: #888;
+}
+
+
+@media screen and (max-width: 899px)
+{
+  .log {
+    background-color: #f0f0f0;
+    /* padding: 10px; */
+    border-radius: 5px;
+    box-shadow: 1px 6px 15px rgba(113, 133, 133, 0.1);
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+  }
+
+  label {
+
+    padding: 5px 15px;
+    margin-bottom: 1px;
+    font-weight: bold;
+  }
+
+  input,
+  select,#password {
+    /* display: block;
+    text-align: left; */
+    width: 80%;
+    padding: 8px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+  }
 }

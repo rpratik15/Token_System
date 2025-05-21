@@ -41,6 +41,7 @@ function User() {
        <hr className="divider" />
         <div className="token-info">
             <h2>Token Information</h2>
+            
         </div>
     </div>
   )

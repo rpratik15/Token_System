@@ -19,13 +19,13 @@
 }
 
 
-user-form>input
+input
 {
   margin:3px;
   border: 1px solid #5e5c5c;
   border-radius: 4px;
   background-color: rgb(247, 247, 247);
- width: 100%;
+ width: 90%;
 }
 textarea {
   width: 100%;
@@ -90,7 +90,7 @@ input
   border: 1px solid #5e5c5c;
   border-radius: 4px;
   background-color: rgb(247, 247, 247);
- width: 80%;
+  width: 90%;
 }
 textarea {
   width: 80%;

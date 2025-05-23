@@ -1,5 +1,8 @@
 import React from 'react'
 import '../Style/user.css'
+import UserToken from './UserToken'
+import Button from 'react-bootstrap/Button';
+
 
 function User() {
   return (
@@ -35,13 +38,15 @@ function User() {
             
         </form>
         <div className="user-btn">
-            <button type='submit'>Submit</button>
-            <button type='reset'>Reset</button>
+           <Button variant="success"  type='submit'>Submit</Button>
+            <Button variant="success" type='reset'>Reset</Button>
+            {/* <button type='submit'>Submit</button>
+            <button type='reset'>Reset</button> */}
         </div>
        <hr className="divider" />
         <div className="token-info">
             <h2>Token Information</h2>
-            
+            <UserToken date="2023-10-01" machine_name="Mark II" customer_name="Balaji India Pvt Ltd, Delhi" problem="Rajeev Rana" created_by="Sanjay Ramawat" desc="WP can not exceed above 15" status="Pending" image="" />
         </div>
     </div>
   )

@@ -8,26 +8,23 @@
 import { useState } from 'react'
 import Login from './Components/Login'
 import './App.css'
-import { BrowserRouter , Route, Routes } from 'react-router-dom';
+import Navs from './Navs'
+// import { BrowserRouter , Route, Routes } from 'react-router-dom';
 import User from './Components/User'
 import UserToken from './Components/UserToken'
 import Admin from './Components/Admin';
+import { UserContextProvider } from './Context/userContext'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        {/* <h1>Welcome to the Token Management System</h1> */}
-        <Routes>
-          <Route path="/" element={<Login/>} />
-          <Route path="/user" element={<User/>} />
-          <Route path="/admin" element={<Admin/>} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-      
+
+    // <UserContextProvider>
+  <Navs/>
+    
+    // </UserContextProvider>
     
     
   )

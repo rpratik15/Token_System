@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 function Login() {
   const navigate = useNavigate()
 
-  const [success, setSuccess] = React.useState(false)
+  const [success, setSuccess] = React.useState(null)
 /* <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About</Link></li>
@@ -16,10 +16,10 @@ function Login() {
     const user = e.target.user.value
     const pass = e.target.password.value
     if(user === "admin" && pass === "admin"){
-      setSuccess(true)
+      setSuccess("admin")
       navigate("/admin")
     }else if(user === "user" && pass === "user"){
-      setSuccess(true)
+      setSuccess("user")
       navigate("/user")
     }else{
       alert("Invalid username or password")
@@ -43,7 +43,7 @@ function Login() {
                 <label htmlFor="password">Password</label>
                 <input type="password" id="password" name="password" required/>
                 <br></br>
-                <button type="submit">Login</button>
+                <button id="login-btn" type="submit">Login</button>
             </form>
         
     </div>

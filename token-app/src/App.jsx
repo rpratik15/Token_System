@@ -5,7 +5,7 @@
 // as status of the request update it should be visible to the user
 
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Login from './Components/Login'
 import './App.css'
 import Navs from './Navs'
@@ -13,18 +13,18 @@ import Navs from './Navs'
 import User from './Components/User'
 import UserToken from './Components/UserToken'
 import Admin from './Components/Admin';
-import { UserContextProvider } from './Context/userContext'
+import { UserContext, UserContextProvider } from './Context/userContext'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
 
-    // <UserContextProvider>
+    <UserContextProvider >
   <Navs/>
     
-    // </UserContextProvider>
+    </UserContextProvider>
     
     
   )

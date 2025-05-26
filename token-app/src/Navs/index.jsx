@@ -1,12 +1,14 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { BrowserRouter,Route,Routes,Navigate } from 'react-router-dom'
 import Login from '../Components/Login'
 import User from '../Components/User'
 import Admin from '../Components/Admin'
 import About from '../Components/About'
 import ContactUs from '../Components/ContactUs'
+import { UserContext } from '../Context/userContext'
 
 function Navs() {
+
   return (
     <BrowserRouter>
         <Routes>

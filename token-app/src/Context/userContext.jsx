@@ -28,15 +28,15 @@ const reducer = (state, action) => {
 }
   export const UserContextProvider = ({ children }) => {
 const [state, dispatch] = useReducer(reducer, initialValue);
-const navigate = useNavigate();
+//const navigate = useNavigate();
 
-useEffect(() => {
-  if (state.logintype === 'admin') {  
-    navigate('/admin');
-  } else if (state.logintype === 'user') {
-    navigate('/user');
-  }
-}, [state.logintype, navigate]);
+// useEffect(() => {
+//   if (state.logintype === 'admin') {  
+//     navigate('/admin');
+//   } else if (state.logintype === 'user') {
+//     navigate('/user');
+//   }
+// }, [state.logintype, navigate]);
   
     return(
         <UserContext.Provider value={[state,dispatch]} >

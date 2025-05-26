@@ -5,8 +5,9 @@ import { UserContext } from '../Context/userContext'
 
 function Login() {
   // const navigate = useNavigate()
-  const [state,dispatch] = useContext(UserContext)
 
+  const [state,dispatch] = useContext(UserContext)
+console.log(state)
   // const [success, setSuccess] = React.useState(null)
 /* <ul>
                 <li><Link to="/">Home</Link></li>
@@ -20,11 +21,11 @@ function Login() {
     if(user === "admin" && pass === "admin"){
       dispatch({type:"SET_LOGIN_TYPE",payload:"admin"})
       // setSuccess("admin")
-      // navigate("/admin")
+       //navigate("/admin")
     }else if(user === "user" && pass === "user"){
       // setSuccess("user")
       dispatch({type:"SET_LOGIN_TYPE",payload:"user"})
-      // navigate("/user")
+       //navigate("/user")
     }else{
       alert("Invalid username or password")
     }

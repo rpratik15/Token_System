@@ -11,13 +11,35 @@ import { useContext } from 'react';
 
 export const UserContext = createContext();
 
+const initialValue={
+  logintype:null,
+  tokeninfo:null
+}
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_LOGIN_TYPE':
+      return { ...state, logintype: action.payload };
+    case 'SET_TOKEN_INFO':
+      return { ...state, tokeninfo: action.payload };
+    default:
+      return state;
+  }
+}
   export const UserContextProvider = ({ children }) => {
+const [state, dispatch] = useReducer(reducer, initialValue);
+const navigate = useNavigate();
 
- 
+useEffect(() => {
+  if (state.logintype === 'admin') {  
+    navigate('/admin');
+  } else if (state.logintype === 'user') {
+    navigate('/user');
+  }
+}, [state.logintype, navigate]);
   
     return(
-        <UserContext.Provider value={user} >
+        <UserContext.Provider value={[state,dispatch]} >
             {children}
         </UserContext.Provider>
     );

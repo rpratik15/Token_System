@@ -1,35 +1,49 @@
-import React,{useContext} from 'react'
+import React,{useContext,useEffect} from 'react'
 import '../Style/login.css'
-// import { useNavigate } from "react-router-dom"
+ import { useNavigate,Outlet } from "react-router-dom"
 import { UserContext } from '../Context/userContext'
 
 function Login() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [state,dispatch] = useContext(UserContext)
-console.log(state)
-  // const [success, setSuccess] = React.useState(null)
-/* <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
-            </ul>*/
+  const isAuth = state.isAuth
+  const logintype= state.logintype
+
   const checkLogin=(e)=>{
     e.preventDefault()
     const user = e.target.user.value
     const pass = e.target.password.value
+    
     if(user === "admin" && pass === "admin"){
       dispatch({type:"SET_LOGIN_TYPE",payload:"admin"})
-      // setSuccess("admin")
-       //navigate("/admin")
+
     }else if(user === "user" && pass === "user"){
-      // setSuccess("user")
+
       dispatch({type:"SET_LOGIN_TYPE",payload:"user"})
-       //navigate("/user")
+
     }else{
       alert("Invalid username or password")
     }
   }
+
+  useEffect(()=>{
+    if(isAuth)
+    {
+      if(logintype==="admin")
+      {
+        navigate("/admin")
+      }
+      else
+      {
+        navigate("/user")
+      }
+    }
+    else
+    {
+      navigate("/")
+    }
+  },[isAuth])
 
   
 

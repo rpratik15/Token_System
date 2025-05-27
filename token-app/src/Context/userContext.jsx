@@ -4,24 +4,25 @@
 //4 create a context provider
 
 import React, { createContext, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useContext } from 'react';
+
 
 export const UserContext = createContext();
 
 const initialValue={
-  logintype:null,
-  tokeninfo:null
+logintype:null, // 'admin' or 'user'
+isAuth:false
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'SET_LOGIN_TYPE':
-      return { ...state, logintype: action.payload };
-    case 'SET_TOKEN_INFO':
-      return { ...state, tokeninfo: action.payload };
+      return { ...state, 
+        logintype: action.payload,
+        isAuth: true};
+    case 'RESET_LOGIN_TYPE':
+      return { ...state, logintype: null,
+        isAuth: false
+       };
     default:
       return state;
   }

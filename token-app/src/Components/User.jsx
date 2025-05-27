@@ -4,10 +4,12 @@ import UserToken from './UserToken'
 import Button from 'react-bootstrap/Button';
 
 
+
 function User() {
   return (
     <div className='user'>
       <h1>User Form</h1>
+      <Button variant="primary" id="logout">Logout</Button>
         <form action="" className="user-form">
             
             <div id="grp1">
@@ -46,7 +48,7 @@ function User() {
        <hr className="divider" />
         <div className="token-info">
             <h2>Token Information</h2>
-            <UserToken date="2023-10-01" machine_name="Mark II" customer_name="Balaji India Pvt Ltd, Delhi" problem="Rajeev Rana" created_by="Sanjay Ramawat" desc="WP can not exceed above 15" status="Pending" image="" />
+            <UserToken date="2023-10-01" machine_name="Mark II" customer_name="Balaji India Pvt Ltd, Delhi" problem="Rajeev Rana" created_by="Sanjay Ramawat" desc="WP can not exceed above 15" status="Pending" image="https://images.unsplash.com/photo-1471890701797-59336a877de4?q=80&w=1465&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
         </div>
     </div>
   )

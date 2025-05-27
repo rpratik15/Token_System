@@ -2,15 +2,17 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+
+
 function UserToken({date,machine_name,customer_name,problem,created_by,desc,status,image}) {
   return (
     <div>
         
     
         <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={image} alt='Problem img' />
+      <Card.Img variant="top" src={image} alt='Problem img' id="Card-img" />
       <Card.Body>
-        <Card.Title>{machine_name}</Card.Title>
+        <Card.Title id="title">{machine_name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{date}</Card.Subtitle>
         <Card.Text>
          {desc}

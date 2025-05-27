@@ -1,12 +1,12 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-
+import "../Style/usertoken.css"
 
 
 function UserToken({date,machine_name,customer_name,problem,created_by,desc,status,image}) {
   return (
-    <div>
+    <div className='user-token'>
         
     
         <Card style={{ width: '18rem' }}>

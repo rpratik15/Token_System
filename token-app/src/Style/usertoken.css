@@ -1,0 +1,17 @@
+.user-token {
+   
+max-height: max-content !important;
+    overflow: auto;
+    padding: 20px;
+    background-color: rgb(218, 219, 216);
+    border-radius: 20px;
+   
+
+}
+#Card-img
+{
+    width: 95%;
+   margin: 5px;
+   padding: 5px;
+    border-radius: 20px !important;
+}

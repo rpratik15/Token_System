@@ -2,8 +2,8 @@
    
 max-height: max-content !important;
     overflow: auto;
-    padding: 20px;
-    background-color: rgb(218, 219, 216);
+    padding: 10px;
+    /* background-color: rgb(218, 219, 216); */
     border-radius: 20px;
    
 
@@ -14,4 +14,24 @@ max-height: max-content !important;
    margin: 5px;
    padding: 5px;
     border-radius: 20px !important;
+}
+
+.card-subtitle {
+  
+        display: flex;
+    justify-content: end;
+}
+
+.list-group-flush
+{
+    text-align: left;
+}
+
+#token-desc
+{
+    text-wrap: wrap;
+    overflow:auto;
+  
+    display: -webkit-box;
+    height: 100px;
 }

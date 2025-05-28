@@ -5,6 +5,7 @@ import "../Style/usertoken.css"
 
 
 function UserToken({date,machine_name,customer_name,problem,created_by,desc,status,image}) {
+  
   return (
     <div className='user-token'>
         
@@ -14,14 +15,15 @@ function UserToken({date,machine_name,customer_name,problem,created_by,desc,stat
       <Card.Body>
         <Card.Title id="title">{machine_name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{date}</Card.Subtitle>
-        <Card.Text>
+        {/* <Card.Text>
          {desc}
-        </Card.Text>
+        </Card.Text> */}
       </Card.Body>
       <ListGroup className="list-group-flush">
+         <ListGroup.Item id="token-desc">{desc}</ListGroup.Item>
         <ListGroup.Item>Customer Name : {customer_name}</ListGroup.Item>
         <ListGroup.Item>Reported by : {problem}</ListGroup.Item>
-        <ListGroup.Item>Token Genereted by : {created_by}</ListGroup.Item>
+        <ListGroup.Item>Genereted by : {created_by}</ListGroup.Item>
       </ListGroup>
      
       <Card.Body>

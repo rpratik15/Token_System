@@ -33,13 +33,18 @@ router.get('/get', async (req, res) => {
 });
 //upload.single("singleFile")
 router.post('/add',upload.single("singleImage"), async (req, res) => {
-    const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription, imageUrl } = req.body;
+    const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription } = req.body;
+    const imageUrl = req.file ? req.file.filename : null; // Get the filename from the uploaded file
+ 
     try {
-        console.log(req.file, req.body);
-        res.send(req.body)
-        const newToken = new Token({ date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription, imageUrl });
+        const existingToken={...req.body, imageUrl};
+        console.log(existingToken);
+         res.send(existingToken)
+        const newToken = new Token(existingToken);
         await newToken.save();
-        res.status(201).json(token);
+        // await Token.create({ date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription, imageUrl });
+        res.status(201).json({ message: 'Token created successfully' });
+        // res.status(200).json(newToken);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

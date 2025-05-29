@@ -51,14 +51,7 @@ function User() {
     }
     formData.append('status', 'Pending');
    
-    console.log(formData.getAll('date'));
-    console.log(formData.getAll('machine_name')); 
-    console.log(formData.getAll('customer_name'));
-    console.log(formData.getAll('problem'));
-    console.log(formData.getAll('created_by'));
-    console.log(formData.getAll('desc'));
-    console.log(formData.getAll('singleImage'));
-    console.log(formData.getAll('status'));
+
 
         const result = await axios.post(
       "http://localhost:3000/token/add",

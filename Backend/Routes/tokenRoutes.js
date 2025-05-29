@@ -1,3 +1,5 @@
+const multer = require("multer");
+
 const express = require('express');//import the required package
 const router = express();
 const mongoose=require("mongoose")
@@ -5,7 +7,18 @@ const Token = require('../DBModel/model.js');//import the model
 
 
 router.use(express.json())// Parse JSON bodies (as sent by API clients)
-
+const cors = require("cors");
+router.use(cors());
+// Set up storage for multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // Directory to save uploaded files
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname); // Append timestamp to the original file name
+    }
+});
+const upload = multer({ storage: storage });
 router.get('/get', async (req, res) => {
     try {
         const tokens = await Token.find();
@@ -18,10 +31,11 @@ router.get('/get', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-router.post('/add', async (req, res) => {
+//upload.single("singleFile")
+router.post('/add',upload.single("singleImage"), async (req, res) => {
     const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription, imageUrl } = req.body;
     try {
+        console.log(req.file, req.body);
         res.send(req.body)
         const newToken = new Token({ date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription, imageUrl });
         await newToken.save();

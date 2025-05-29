@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../Style/user.css'
 import UserToken from './UserToken'
 import Button from 'react-bootstrap/Button';
-
+import axios from 'axios';
 
 
 
@@ -24,7 +24,7 @@ function User() {
     console.log("Resetting data");
     setTokenData(initialValue);
   }
-  const sendDataToDb = (e) => {
+  const sendDataToDb =async (e) => {
     console.log("Sending data to DB");
     e.preventDefault();
 
@@ -38,7 +38,43 @@ function User() {
       image: e.target.image.files[0] ? URL.createObjectURL(e.target.image.files[0]) : '',
       status: 'Pending'
     })
-    console.log(tokenData);
+
+    const formData=new FormData();
+    formData.append('date', e.target.date.value);
+    formData.append('machine_name', e.target.machine_name.value);
+    formData.append('customer_name', e.target.customer_name.value);
+    formData.append('problem', e.target.problem.value);
+    formData.append('created_by', e.target.created_by.value);
+    formData.append('desc', e.target.desc.value);
+    if (e.target.image.files[0]) {
+      formData.append('singleImage', e.target.image.files[0]);
+    }
+    formData.append('status', 'Pending');
+   
+    console.log(formData.getAll('date'));
+    console.log(formData.getAll('machine_name')); 
+    console.log(formData.getAll('customer_name'));
+    console.log(formData.getAll('problem'));
+    console.log(formData.getAll('created_by'));
+    console.log(formData.getAll('desc'));
+    console.log(formData.getAll('singleImage'));
+    console.log(formData.getAll('status'));
+
+        const result = await axios.post(
+      "http://localhost:3000/token/add",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+
+    console.log(result.status);
+    if (result.status === 200 || result.status === 201) {
+      console.log("Data sent successfully");
+      
+    } else {
+      console.error("Error sending data");
+    }
   }
 
   const handleChange = (e) => {

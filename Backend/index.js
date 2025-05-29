@@ -1,4 +1,5 @@
 //app.js
+const multer = require("multer");
 
 const express = require('express');//import the required package
 const app = express();
@@ -6,7 +7,8 @@ const mongoose=require("mongoose")
 const tokenRoutes = require('./Routes/tokenRoutes.js');//import the routes
 
 app.use(express.json())// Parse JSON bodies (as sent by API clients)
-
+const cors = require("cors");
+app.use(cors());
 
 
 app.listen(3000, () => {

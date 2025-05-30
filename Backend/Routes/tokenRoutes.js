@@ -1,14 +1,14 @@
 const multer = require("multer");
-
+const cors = require("cors");
 const express = require('express');//import the required package
 const router = express();
 const mongoose=require("mongoose")
 const Token = require('../DBModel/model.js');//import the model
 
-
-router.use(express.json())// Parse JSON bodies (as sent by API clients)
-const cors = require("cors");
 router.use(cors());
+router.use(express.json())// Parse JSON bodies (as sent by API clients)
+
+
 // Set up storage for multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -33,7 +33,7 @@ router.get('/get', async (req, res) => {
 });
 //upload.single("singleFile")
 router.post('/add',upload.single("singleImage"), async (req, res) => {
-    const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription } = req.body;
+    // const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription } = req.body;
     const imageUrl = req.file ? req.file.filename : null; // Get the filename from the uploaded file
  
     try {

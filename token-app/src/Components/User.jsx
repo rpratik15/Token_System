@@ -9,13 +9,13 @@ import axios from 'axios';
 function User() {
 
   const initialValue = {
-    date: '',
-    machine_name: '',
-    customer_name: '',
-    problem: '',
-    created_by: '',
-    desc: '',
-    image: '',
+    date: new Date().toISOString().split('T')[0], // Default to today's date
+    machineName: '',
+    customerName: '',
+    problemReportedBy: '',
+    tokenCreatedBy: '',
+    problemDescription: '',
+    imageUrl: '',
     status: 'Pending'
   }
   const [tokenData, setTokenData] = useState(initialValue);
@@ -28,30 +28,49 @@ function User() {
     console.log("Sending data to DB");
     e.preventDefault();
 
-    setTokenData({
-      date: e.target.date.value,
-      machine_name: e.target.machine_name.value,
-      customer_name: e.target.customer_name.value,
-      problem: e.target.problem.value,
-      created_by: e.target.created_by.value,
-      desc: e.target.desc.value,
-      image: e.target.image.files[0] ? URL.createObjectURL(e.target.image.files[0]) : '',
-      status: 'Pending'
-    })
-
+    // setTokenData({
+    //   date: e.target.date.value,
+    //   machineName: e.target.machineName.value,
+    //   customerName: e.target.customerName.value,
+    //   problemReportedBy: e.target.problemReportedBy.value,
+    //   tokenCreatedBy: e.target.tokenCreatedBy.value,
+    //   problemDescription: e.target.problemDescription.value,
+    //   imageUrl: e.target.imageUrl.files[0] ? URL.createObjectURL(e.target.imageUrl.files[0]) : '',
+    //   status: 'Pending'
+    // })
+// console.log("Token data before sending:", tokenData);
     const formData=new FormData();
-    formData.append('date', e.target.date.value);
-    formData.append('machine_name', e.target.machine_name.value);
-    formData.append('customer_name', e.target.customer_name.value);
-    formData.append('problem', e.target.problem.value);
-    formData.append('created_by', e.target.created_by.value);
-    formData.append('desc', e.target.desc.value);
-    if (e.target.image.files[0]) {
-      formData.append('singleImage', e.target.image.files[0]);
+    formData.append('date', tokenData.date);
+    formData.append('machineName', e.target.machineName.value);
+    formData.append('customerName', e.target.customerName.value);
+    formData.append('problemReportedBy', e.target.problemReportedBy.value);
+    formData.append('tokenCreatedBy', e.target.tokenCreatedBy.value);
+    formData.append('problemDescription', e.target.problemDescription.value);
+    if (e.target.imageUrl.files[0]) {
+      formData.append('singleImage', e.target.imageUrl.files[0]);
     }
     formData.append('status', 'Pending');
-   
+  //  console.log("Form data to be sent:", formData.get('date'), formData.get('machineName'), formData.get('customerName'), formData.get('problemReportedBy'), formData.get('tokenCreatedBy'), formData.get('problemDescription'), formData.get('singleImage'));
 
+    // const tokenData = {
+    //   date: e.target.date.value,
+    //   machineName: e.target.machineName.value,
+    //   customerName: e.target.customerName.value,
+    //   problemReportedBy: e.target.problemReportedBy.value,
+    //   tokenCreatedBy: e.target.tokenCreatedBy.value,
+    //   problemDescription: e.target.problemDescription.value,
+    //   imageUrl: e.target.imageUrl.files[0] ? URL.createObjectURL(e.target.imageUrl.files[0]) : '',
+    //   status: 'Pending'
+    // };
+//  const result = await axios.post(
+//       "http://localhost:3000/token/add",
+//       tokenData
+     
+//     ).then((response) => {
+//       console.log("Data sent successfully", response.data);
+//     }).catch((error) => {
+//       console.error("Error sending data", error);
+//     });
 
         const result = await axios.post(
       "http://localhost:3000/token/add",
@@ -60,19 +79,26 @@ function User() {
       {
         headers: { "Content-Type": "multipart/form-data" },
       }
-    );
+    ).then((response) => {
+      console.log("Data sent successfully", response.data);
+    }).catch((error) => {
+      console.error("Error sending data", error);
+    });
+    console.log("Result from server:", result);
 
-    console.log(result.status);
-    if (result.status === 200 || result.status === 201) {
-      console.log("Data sent successfully");
+    // console.log(result);
+    // if (result.status === 200 || result.status === 201) {
+    //   console.log("Data sent successfully");
       
-    } else {
-      console.error("Error sending data");
-    }
+    // } else {
+    //   console.error("Error sending data");
+    // }
   }
 
   const handleChange = (e) => {
+    
     const { name, value } = e.target;
+    console.log(name, value);
     setTokenData((prevData) => ({
       ...prevData,
       [name]: value
@@ -92,24 +118,24 @@ function User() {
             <input type="date" id="date" name="date" value={tokenData.date} onChange={handleChange} required />
             <br />
             <label htmlFor="machine_name">Machine Name:</label>
-            <input type="text" id="machine_name" name="machine_name" value={tokenData.machine_name} onChange={handleChange} required />
+            <input type="text" id="machine_name" name="machineName" value={tokenData.machineName} onChange={handleChange} required />
             <br />
             <label htmlFor="customer_name">Customer Name:</label>
-            <input type="text" id="customer_name" name="customer_name" value={tokenData.customer_name} onChange={handleChange} required />
+            <input type="text" id="customer_name" name="customerName" value={tokenData.customerName} onChange={handleChange} required />
             <br />
             <label htmlFor="problem">Problem Reported By:</label>
-            <input type="text" id="problem" name="problem" value={tokenData.problem} onChange={handleChange} required />
+            <input type="text" id="problem" name="problemReportedBy" value={tokenData.problemReportedBy} onChange={handleChange} required />
             <br />
           </div>
           <div id="grp2">
             <label htmlFor="created_by">Token Generated By:</label>
-            <input type="text" id="created_by" name="created_by" value={tokenData.created_by} onChange={handleChange} required />
+            <input type="text" id="created_by" name="tokenCreatedBy" value={tokenData.tokenCreatedBy} onChange={handleChange} required />
             <br />
             <label htmlFor="desc">Problem Description:</label>
-            <textarea id="desc" name="desc" value={tokenData.desc} onChange={handleChange} ></textarea>
+            <textarea id="desc" name="problemDescription" value={tokenData.problemDescription} onChange={handleChange} ></textarea>
             <br />
             <label htmlFor="image">Upload Image:</label>
-            <input type="file" id="image" name="image" value={tokenData.img} onChange={handleChange} />
+            <input type="file" id="image" name="imageUrl" value={tokenData.imageUrl} onChange={handleChange} />
             <br />
           </div>
         </div>

@@ -4,10 +4,10 @@ const express = require('express');//import the required package
 const router = express();
 const mongoose=require("mongoose")
 const Token = require('../DBModel/model.js');//import the model
-
+const bodyParser = require("body-parser");
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
 router.use(cors());
-router.use(express.json())// Parse JSON bodies (as sent by API clients)
-
 
 // Set up storage for multer
 const storage = multer.diskStorage({
@@ -31,54 +31,49 @@ router.get('/get', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-router.post('/add', async (req, res) => {
-    console.log(req.body);
-    const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription } = req.body;
-    const imageUrl = req.file ? req.file.filename : null;
+// router.post('/add',async (req, res) => {
+//     console.log(req.body);
+    // const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription,imageUrl } = req.body;
+//     const image = req.file ? req.file.filename : null;
+    // try {
+
+    //     const newToken =  new Token({
+    //         date,
+    //         machineName,
+    //         customerName,
+    //         problemReportedBy,
+    //         tokenCreatedBy,
+    //         problemDescription,
+    //         imageUrl});
+    //     await newToken.save();
+    //      res.send({message:"Token generated successfully"});
+    //     res.status(201).json({ message: 'Token created successfully' });
+    // } catch (error) {
+    //     res.status(400).json({ error: error.message });
+    // }
+// ?});?
+// //upload.single("singleFile")
+router.post('/add',upload.single("singleImage"), async (req, res) => {
+    console.log("Request body:", req.body);
+    console.log("Uploaded file:", req.file);
+       const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription } = req.body;
+
+    const imageUrl = req.file ? req.file.filename : null; // Get the filename from the uploaded file
+ 
     try {
-        const newToken = new Token({ date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription,imageUrl });
-        await newToken.save();
-        res.status(201).json({ message: 'Token created successfully' });
+ 
+        await Token.create({ date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription, imageUrl });
+        res.send({message:"Token generated successfully"});
+        // res.status(201).json({ message: 'Token created successfully' });
+        // res.status(200).json(newToken);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 });
-// //upload.single("singleFile")
-// router.post('/add',upload.single("singleImage"), async (req, res) => {
-//     // const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription } = req.body;
-//     const imageUrl = req.file ? req.file.filename : null; // Get the filename from the uploaded file
- 
-//     try {
-//         //const existingToken={...req.body, imageUrl};
-//         //console.log(existingToken);
-//         //  res.send(existingToken)
-      
-//         const newToken = new Token({...req.body, imageUrl});
-//         newToken.save();
-//         // await Token.create({ date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription, imageUrl });
-//         res.status(201).json({ message: 'Token created successfully' });
-//         // res.status(200).json(newToken);
-//     } catch (error) {
-//         res.status(400).json({ error: error.message });
-//     }
-// });
 
 
 
-// router.put('/update/:id',async(req,res)=>{
-//     const { id } = req.params;
-//     const { status,comment } = req.body;
-//     try {
-//         const token = await Token.findByIdAndUpdate(id,{status,comment}, { new: true });
-//         if (!token) {
-//             return res.status(404).json({ message: 'Token not found' });
-//         }
-//         res.status(200).json(token);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-    
-// });
+
 
 router.delete('/delete/:id',async(req,res)=>{
     const { id } = req.params;

@@ -31,41 +31,54 @@ router.get('/get', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-//upload.single("singleFile")
-router.post('/add',upload.single("singleImage"), async (req, res) => {
-    // const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription } = req.body;
-    const imageUrl = req.file ? req.file.filename : null; // Get the filename from the uploaded file
- 
+router.post('/add', async (req, res) => {
+    console.log(req.body);
+    const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription } = req.body;
+    const imageUrl = req.file ? req.file.filename : null;
     try {
-        const existingToken={...req.body, imageUrl};
-        console.log(existingToken);
-         res.send(existingToken)
-        const newToken = new Token(existingToken);
+        const newToken = new Token({ date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription,imageUrl });
         await newToken.save();
-        // await Token.create({ date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription, imageUrl });
         res.status(201).json({ message: 'Token created successfully' });
-        // res.status(200).json(newToken);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 });
+// //upload.single("singleFile")
+// router.post('/add',upload.single("singleImage"), async (req, res) => {
+//     // const { date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription } = req.body;
+//     const imageUrl = req.file ? req.file.filename : null; // Get the filename from the uploaded file
+ 
+//     try {
+//         //const existingToken={...req.body, imageUrl};
+//         //console.log(existingToken);
+//         //  res.send(existingToken)
+      
+//         const newToken = new Token({...req.body, imageUrl});
+//         newToken.save();
+//         // await Token.create({ date, machineName, customerName, problemReportedBy, tokenCreatedBy, problemDescription, imageUrl });
+//         res.status(201).json({ message: 'Token created successfully' });
+//         // res.status(200).json(newToken);
+//     } catch (error) {
+//         res.status(400).json({ error: error.message });
+//     }
+// });
 
 
 
-router.put('/update/:id',async(req,res)=>{
-    const { id } = req.params;
-    const { status,comment } = req.body;
-    try {
-        const token = await Token.findByIdAndUpdate(id,{status,comment}, { new: true });
-        if (!token) {
-            return res.status(404).json({ message: 'Token not found' });
-        }
-        res.status(200).json(token);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+// router.put('/update/:id',async(req,res)=>{
+//     const { id } = req.params;
+//     const { status,comment } = req.body;
+//     try {
+//         const token = await Token.findByIdAndUpdate(id,{status,comment}, { new: true });
+//         if (!token) {
+//             return res.status(404).json({ message: 'Token not found' });
+//         }
+//         res.status(200).json(token);
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
     
-});
+// });
 
 router.delete('/delete/:id',async(req,res)=>{
     const { id } = req.params;

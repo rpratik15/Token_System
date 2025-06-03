@@ -56,10 +56,10 @@ function User() {
         const result = await axios.post(
       "http://localhost:3000/token/add",
       formData
-      // ,
-      // {
-      //   headers: { "Content-Type": "multipart/form-data" },
-      // }
+      ,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
     );
 
     console.log(result.status);

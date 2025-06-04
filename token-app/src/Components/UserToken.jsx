@@ -5,7 +5,7 @@ import "../Style/usertoken.css"
 
 
 function UserToken({date,machine_name,customer_name,problem,created_by,desc,status,image}) {
-  
+  console.log(image)
   return (
     <div className='user-token'>
         

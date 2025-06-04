@@ -8,7 +8,9 @@ const bodyParser = require("body-parser");
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 router.use(cors());
+const path = require('path');
 
+router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Set up storage for multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

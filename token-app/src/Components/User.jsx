@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import '../Style/user.css'
 import UserToken from './UserToken'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+
 
 
 
@@ -19,7 +20,21 @@ function User() {
     status: 'Pending'
   }
   const [tokenData, setTokenData] = useState(initialValue);
+  const [  tokenList, setTokenList] = useState([]);
 
+   useEffect(() => {
+     
+      featchData()},[]);
+
+const featchData = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/token/get");
+   setTokenList(response.data);
+   
+  } catch (error) {
+    console.error("Error fetching data", error);
+  }
+}
   const resetData = () => {
     console.log("Resetting data");
     setTokenData(initialValue);
@@ -28,17 +43,6 @@ function User() {
     console.log("Sending data to DB");
     e.preventDefault();
 
-    // setTokenData({
-    //   date: e.target.date.value,
-    //   machineName: e.target.machineName.value,
-    //   customerName: e.target.customerName.value,
-    //   problemReportedBy: e.target.problemReportedBy.value,
-    //   tokenCreatedBy: e.target.tokenCreatedBy.value,
-    //   problemDescription: e.target.problemDescription.value,
-    //   imageUrl: e.target.imageUrl.files[0] ? URL.createObjectURL(e.target.imageUrl.files[0]) : '',
-    //   status: 'Pending'
-    // })
-// console.log("Token data before sending:", tokenData);
     const formData=new FormData();
     formData.append('date', tokenData.date);
     formData.append('machineName', e.target.machineName.value);
@@ -50,27 +54,10 @@ function User() {
       formData.append('singleImage', e.target.imageUrl.files[0]);
     }
     formData.append('status', 'Pending');
-  //  console.log("Form data to be sent:", formData.get('date'), formData.get('machineName'), formData.get('customerName'), formData.get('problemReportedBy'), formData.get('tokenCreatedBy'), formData.get('problemDescription'), formData.get('singleImage'));
 
-    // const tokenData = {
-    //   date: e.target.date.value,
-    //   machineName: e.target.machineName.value,
-    //   customerName: e.target.customerName.value,
-    //   problemReportedBy: e.target.problemReportedBy.value,
-    //   tokenCreatedBy: e.target.tokenCreatedBy.value,
-    //   problemDescription: e.target.problemDescription.value,
-    //   imageUrl: e.target.imageUrl.files[0] ? URL.createObjectURL(e.target.imageUrl.files[0]) : '',
-    //   status: 'Pending'
-    // };
-//  const result = await axios.post(
-//       "http://localhost:3000/token/add",
-//       tokenData
-     
-//     ).then((response) => {
-//       console.log("Data sent successfully", response.data);
-//     }).catch((error) => {
-//       console.error("Error sending data", error);
-//     });
+
+ 
+
 
         const result = await axios.post(
       "http://localhost:3000/token/add",
@@ -86,19 +73,12 @@ function User() {
     });
     console.log("Result from server:", result);
 
-    // console.log(result);
-    // if (result.status === 200 || result.status === 201) {
-    //   console.log("Data sent successfully");
-      
-    // } else {
-    //   console.error("Error sending data");
-    // }
   }
 
   const handleChange = (e) => {
     
     const { name, value } = e.target;
-    console.log(name, value);
+   
     setTokenData((prevData) => ({
       ...prevData,
       [name]: value
@@ -132,7 +112,7 @@ function User() {
             <input type="text" id="created_by" name="tokenCreatedBy" value={tokenData.tokenCreatedBy} onChange={handleChange} required />
             <br />
             <label htmlFor="desc">Problem Description:</label>
-            <textarea id="desc" name="problemDescription" value={tokenData.problemDescription} onChange={handleChange} ></textarea>
+            <textarea id="desc" name="problemDescription" value={tokenData.problemDescription} onChange={handleChange} required />
             <br />
             <label htmlFor="image">Upload Image:</label>
             <input type="file" id="image" name="imageUrl" value={tokenData.imageUrl} onChange={handleChange} />
@@ -150,13 +130,33 @@ function User() {
       <hr className="divider" />
       <h2>Token Information</h2>
       <div className="token-info">
+            {
 
-        <UserToken date="2023-02-01" machine_name="Mark II" customer_name="Balaji India Pvt Ltd, Delhi" problem="Rajeev Rana" created_by="Sanjay Ramawat" desc="WP can not exceed above 15, chiller also not working" status="Pending" image="https://images.unsplash.com/photo-1471890701797-59336a877de4?q=80&w=1465&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-        <UserToken date="2024-05-01" machine_name="Mark I" customer_name="Arrya tools, Mumbai" problem="Dhiraaj Rai" created_by="Prince" desc="Insatlled new software but always ask for password" status="Pending" image="https://images.unsplash.com/photo-1471890701797-59336a877de4?q=80&w=1465&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+              tokenList.map((token,index)=>{
+               
+                return (
+                  <UserToken 
+                    key={index}
+                    date={token.date} 
+                    machine_name={token.machineName} 
+                    customer_name={token.customerName} 
+                    problem={token.problemReportedBy} 
+                    created_by={token.tokenCreatedBy} 
+                    desc={token.problemDescription} 
+                    status={token.status} 
+                    image={`http://localhost:3000/uploads/${token.imageUrl}`} // Assuming the image is stored in the uploads folder
+                  />
+                )
+              })
+            }
+
+
+        {/* <UserToken date="2023-02-01" machine_name="Mark II" customer_name="Balaji India Pvt Ltd, Delhi" problem="Rajeev Rana" created_by="Sanjay Ramawat" desc="WP can not exceed above 15, chiller also not working" status="Pending" image="https://images.unsplash.com/photo-1471890701797-59336a877de4?q=80&w=1465&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" /> */}
+        {/* <UserToken date="2024-05-01" machine_name="Mark I" customer_name="Arrya tools, Mumbai" problem="Dhiraaj Rai" created_by="Prince" desc="Insatlled new software but always ask for password" status="Pending" image="https://images.unsplash.com/photo-1471890701797-59336a877de4?q=80&w=1465&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
 
         <UserToken date="2025-11-01" machine_name="Enova" customer_name="India tools Pvt Ltd, Pune" problem="Ajaykant" created_by="Sanjay Ramawat" desc="chiller also not working" status="Pending" image="https://images.unsplash.com/photo-1471890701797-59336a877de4?q=80&w=1465&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
 
-        <UserToken date="2025-12-01" machine_name="Emerge S43" customer_name="Jiya tools, Delhi" problem="Rajeev Rana" created_by="Sanjay Ramawat" desc="Need new password" status="Pending" image="https://images.unsplash.com/photo-1471890701797-59336a877de4?q=80&w=1465&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+        <UserToken date="2025-12-01" machine_name="Emerge S43" customer_name="Jiya tools, Delhi" problem="Rajeev Rana" created_by="Sanjay Ramawat" desc="Need new password" status="Pending" image="https://images.unsplash.com/photo-1471890701797-59336a877de4?q=80&w=1465&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" /> */}
 
       </div>
     </div>

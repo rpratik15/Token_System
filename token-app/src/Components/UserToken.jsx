@@ -11,7 +11,7 @@ function UserToken({date,machine_name,customer_name,problem,created_by,desc,stat
         
     
         <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={image} alt='Problem img' id="Card-img" />
+      <Card.Img variant="top" src={image} alt='No Image' id="Card-img" />
       <Card.Body>
         <Card.Title id="title">{machine_name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{date}</Card.Subtitle>

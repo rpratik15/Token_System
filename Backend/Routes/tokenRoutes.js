@@ -6,18 +6,19 @@ const mongoose=require("mongoose")
 const Token = require('../DBModel/model.js');//import the model
 const bodyParser = require("body-parser");
 router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
+//router.use(express.urlencoded({ extended: true }));
 router.use(cors());
-const path = require('path');
 
-router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
 // Set up storage for multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/'); // Directory to save uploaded files
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname); // Append timestamp to the original file name
+        file=file.originalname.replaceAll(' ','_');
+        cb(null, Date.now() + '-' + file); // Append timestamp to the original file name
     }
 });
 const upload = multer({ storage: storage });

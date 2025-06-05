@@ -11,9 +11,12 @@ max-height: max-content !important;
 #Card-img
 {
     width: 95%;
-   margin: 5px;
-   padding: 5px;
+   margin: 7px;
+   padding: 3px;
     border-radius: 20px !important;
+    border: 1px solid #a3a2a2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 180px;
 }
 
 .card-subtitle {

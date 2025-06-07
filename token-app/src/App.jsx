@@ -5,25 +5,38 @@
 // as status of the request update it should be visible to the user
 
 
-import { useContext, useState } from 'react'
-import Login from './Components/Login'
+// import { useContext, useState } from 'react'
+// import Login from './Components/Login'
 import './App.css'
 import Navs from './Navs'
 // import { BrowserRouter , Route, Routes } from 'react-router-dom';
-import User from './Components/User'
-import UserToken from './Components/UserToken'
-import Admin from './Components/Admin';
+// import User from './Components/User'
+// import UserToken from './Components/UserToken'
+// import Admin from './Components/Admin';
 import { UserContext, UserContextProvider } from './Context/userContext'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Toaster } from 'react-hot-toast';
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 function App() {
   
 
   return (
 
     <UserContextProvider >
-  <Navs/>
   
+  <Navbar bg="dark" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+      <Navs/>
     </UserContextProvider>
     
     

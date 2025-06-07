@@ -21,12 +21,12 @@ function User() {
   }
   const [tokenData, setTokenData] = useState(initialValue);
   const [  tokenList, setTokenList] = useState([]);
-
+const [loading, setLoading] = useState(false);
    useEffect(() => {
      
       featchData();
       
-    },[]);
+    },[loading]);
 
 const featchData = async () => {
   try {
@@ -40,6 +40,7 @@ const featchData = async () => {
   const resetData = () => {
     console.log("Resetting data");
     setTokenData(initialValue);
+    setLoading(false);
   }
 
  
@@ -83,7 +84,7 @@ const featchData = async () => {
 const sendDataToDb = (e) => {
     console.log("Sending data to DB");
     e.preventDefault();
-
+   
     const formData=new FormData();
     formData.append('date', tokenData.date);
     formData.append('machineName', e.target.machineName.value);
@@ -95,6 +96,7 @@ const sendDataToDb = (e) => {
       formData.append('singleImage', e.target.imageUrl.files[0]);
     }
     formData.append('status', 'Pending');
+
 toast.promise( async () => {
          await axios.post(
       "http://localhost:3000/token/add",
@@ -102,15 +104,21 @@ toast.promise( async () => {
       ,
       {
         headers: { "Content-Type": "multipart/form-data" },
+      })},{
+
+        loading:"Saving data...",
+         success: <b>Settings saved!!!</b>,
+          error: <b>Error in Saving data!!!</b>,
+          duration: 8000,
       })
-    .then((response) => {
-      console.log("Data sent successfully", response.data);
-    }).catch((error) => {
-      console.error("Error sending data", error);
-    })
+    // .then((response) => {
+    //   console.log("Data sent successfully", response.data);
+    // }).catch((error) => {
+    //   console.error("Error sending data", error);
+    // })
     // console.log("Result from server:", result);
 
-  
+   setLoading(true);
 
 }
   const handleChange = (e) => {

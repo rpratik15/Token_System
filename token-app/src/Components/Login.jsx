@@ -3,6 +3,7 @@ import '../Style/login.css'
  import { useNavigate,Outlet } from "react-router-dom"
 import { UserContext } from '../Context/userContext'
 
+
 function Login() {
   const navigate = useNavigate()
 
@@ -50,6 +51,7 @@ function Login() {
 
   return (
     <div>
+      
        <h2>Login</h2> 
         
             <form  className="log" onSubmit={checkLogin}>

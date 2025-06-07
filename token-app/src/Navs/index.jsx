@@ -7,6 +7,7 @@ import About from '../Components/About'
 import ContactUs from '../Components/ContactUs'
 import { UserContext } from '../Context/userContext'
 
+
 function Navs() {
 
   const [state] = useContext(UserContext)

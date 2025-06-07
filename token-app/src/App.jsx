@@ -15,7 +15,7 @@ import UserToken from './Components/UserToken'
 import Admin from './Components/Admin';
 import { UserContext, UserContextProvider } from './Context/userContext'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { Toaster } from 'react-hot-toast';
 function App() {
   
 
@@ -23,7 +23,7 @@ function App() {
 
     <UserContextProvider >
   <Navs/>
-    
+  
     </UserContextProvider>
     
     

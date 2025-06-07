@@ -3,7 +3,7 @@ import '../Style/user.css'
 import UserToken from './UserToken'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -24,7 +24,9 @@ function User() {
 
    useEffect(() => {
      
-      featchData()},[]);
+      featchData();
+      
+    },[]);
 
 const featchData = async () => {
   try {
@@ -39,7 +41,46 @@ const featchData = async () => {
     console.log("Resetting data");
     setTokenData(initialValue);
   }
-  const sendDataToDb =async (e) => {
+
+ 
+//   const sendDataToDb =async (e) => {
+//     console.log("Sending data to DB");
+//     e.preventDefault();
+
+//     const formData=new FormData();
+//     formData.append('date', tokenData.date);
+//     formData.append('machineName', e.target.machineName.value);
+//     formData.append('customerName', e.target.customerName.value);
+//     formData.append('problemReportedBy', e.target.problemReportedBy.value);
+//     formData.append('tokenCreatedBy', e.target.tokenCreatedBy.value);
+//     formData.append('problemDescription', e.target.problemDescription.value);
+//     if (e.target.imageUrl.files[0]) {
+//       formData.append('singleImage', e.target.imageUrl.files[0]);
+//     }
+//     formData.append('status', 'Pending');
+
+
+
+
+//          await axios.post(
+//       "http://localhost:3000/token/add",
+//       formData
+//       ,
+//       {
+//         headers: { "Content-Type": "multipart/form-data" },
+//       })
+//     .then((response) => {
+//       console.log("Data sent successfully", response.data);
+//     }).catch((error) => {
+//       console.error("Error sending data", error);
+//     })
+//     // console.log("Result from server:", result);
+
+  
+
+// }
+
+const sendDataToDb = (e) => {
     console.log("Sending data to DB");
     e.preventDefault();
 
@@ -54,27 +95,24 @@ const featchData = async () => {
       formData.append('singleImage', e.target.imageUrl.files[0]);
     }
     formData.append('status', 'Pending');
-
-
- 
-
-
-        const result = await axios.post(
+toast.promise( async () => {
+         await axios.post(
       "http://localhost:3000/token/add",
       formData
       ,
       {
         headers: { "Content-Type": "multipart/form-data" },
-      }
-    ).then((response) => {
+      })
+    .then((response) => {
       console.log("Data sent successfully", response.data);
     }).catch((error) => {
       console.error("Error sending data", error);
-    });
-    console.log("Result from server:", result);
+    })
+    // console.log("Result from server:", result);
 
-  }
+  
 
+}
   const handleChange = (e) => {
     
     const { name, value } = e.target;
@@ -89,6 +127,7 @@ const featchData = async () => {
 
   return (
     <div className='user'>
+        <Toaster />
       <h1>User Form</h1>
       <Button variant="primary" id="logout">Logout</Button>
       <form action="" className="user-form" onSubmit={sendDataToDb}>

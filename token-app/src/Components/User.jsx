@@ -136,7 +136,9 @@ toast.promise( async () => {
   return (
     <div className='user'>
         <Toaster />
+        <br/>
       <h1>User Form</h1>
+      <br/>
       <Button variant="primary" id="logout">Logout</Button>
       <form action="" className="user-form" onSubmit={sendDataToDb}>
         <div id="group">

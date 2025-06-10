@@ -1,11 +1,14 @@
 import React,{useContext} from 'react'
-import { BrowserRouter,Route,Routes,Navigate, Outlet } from 'react-router-dom'
+import { BrowserRouter,Route,Routes,Navigate, Outlet,useLocation,NavLink as Link  } from 'react-router-dom'
 import Login from '../Components/Login'
 import User from '../Components/User'
 import Admin from '../Components/Admin'
 import About from '../Components/About'
 import ContactUs from '../Components/ContactUs'
 import { UserContext } from '../Context/userContext'
+import NavbarStrip from './NavbarStrip'
+import Register from '../Components/Register'
+
 
 
 function Navs() {
@@ -23,9 +26,13 @@ function Navs() {
   };
 
   return (
+    <>
+   
     <BrowserRouter>
+     <NavbarStrip/>
         <Routes>
-            <Route path="/" element={<Login/>} />
+            <Route exact strict path="/" element={<Login/>} />
+            <Route path="/register" element={<Register/>} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/user" element={<UserRoute/>}/>
@@ -33,7 +40,8 @@ function Navs() {
         </Routes>
 
 
-</BrowserRouter>    
+</BrowserRouter> 
+</>   
 )
 }
 

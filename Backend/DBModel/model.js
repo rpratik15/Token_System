@@ -17,5 +17,22 @@ const tokenSchema = new mongoose.Schema({
     timestamps: true // Automatically manage createdAt and updatedAt fields
 });
 
+
+
+
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    mobile: { type: String, required: true },   
+    userName: { type: String, required: true },
+    password: { type: String, required: true },
+    repassword: { type: String, required: true },
+    type:{type:String, required: true, default: 'user'}
+},{
+    collection: 'users',
+    timestamps: true // Automatically manage createdAt and updatedAt fields
+});
+
 const Token = mongoose.model('tokens', tokenSchema);
+const Users = mongoose.model('users', userSchema);
 module.exports= Token;
+module.exports= Users;

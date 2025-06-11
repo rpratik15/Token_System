@@ -29,13 +29,11 @@ app.use("/token", tokenRoutes)
 app.post('/users/add',(req, res) => {
     
     const { name, mobile, userName, password, repassword, type } = req.body;
-    if (password !== repassword) {
-        return res.status(400).json({ message: "Passwords do not match!!!" });
-    }
-    if(Users.findOne({mobile:mobile}))
-    {
-        return res.status(400).json({ message: "Mobile number already exists!!!" });
-    }
+ 
+    // if(Users.findOne({mobile:mobile}))
+    // {
+    //     return res.status(401).json({ message: "Mobile number already exists!!!" });
+    // }
     const newUser = new Users({
         name,
         mobile,
@@ -44,7 +42,7 @@ app.post('/users/add',(req, res) => {
         repassword,
         type
     });
-    console.log("new User:", newUser);
+    //console.log("new User:", newUser);
     newUser.save()
         .then(() => res.status(200).json({ message: 'User registered successfully' }))
         .catch(error => res.status(400).json({ error: error.message }));

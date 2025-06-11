@@ -32,6 +32,10 @@ app.post('/users/add',(req, res) => {
     if (password !== repassword) {
         return res.status(400).json({ message: "Passwords do not match!!!" });
     }
+    if(Users.findOne({mobile:mobile}))
+    {
+        return res.status(400).json({ message: "Mobile number already exists!!!" });
+    }
     const newUser = new Users({
         name,
         mobile,

@@ -2,6 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import '../Style/register.css'
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
 
 function Register() {
 
@@ -24,8 +25,24 @@ function Register() {
   }
     const sendDataToDb = (e) => {
         e.preventDefault();
+
+        toast.promise(async ()=>{
+            if (userData.password !== userData.repassword) {
+                throw new Error("Passwords do not match!!!");
+            }
+            if (userData.mobile.length !== 10) {
+                throw new Error("Mobile number must be 10 digits long!!!");
+            }
+            const response = await axios.post("http://localhost:3000/users/add", userData);
+            if (response.status === 200) {
+                toast.success("User registered successfully");
+            } else {
+                throw new Error("Registration failed");
+            }
+
+        });
         // Here you would typically send the data to your backend
-        console.log("Data to be sent:",);
+      
         // Reset form or handle success
     };
   return (

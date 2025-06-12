@@ -43,7 +43,7 @@ function Register() {
                 toast.success("User registered successfully");
             } else {
               toast.error("Registration failed");
-                throw new Error("Registration failed");
+                // throw new Error("Registration failed");
             }
 
         },{

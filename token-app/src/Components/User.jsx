@@ -1,14 +1,17 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import '../Style/user.css'
 import UserToken from './UserToken'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+import { UserContext } from '../Context/userContext'
 
 
 
 function User() {
 
+  const [state,dispatch] = useContext(UserContext)
+    
   const initialValue = {
     date: new Date().toISOString().split('T')[0], // Default to today's date
     machineName: '',
@@ -139,7 +142,7 @@ toast.promise( async () => {
         <br/>
       <h1>User Form</h1>
       <br/>
-      <Button variant="primary" id="logout">Logout</Button>
+      <Button variant="primary" id="logout" onClick={()=> dispatch({type:"RESET_LOGIN_TYPE"})}>Logout</Button>
       <form action="" className="user-form" onSubmit={sendDataToDb}>
         <div id="group">
           <div id="grp1">

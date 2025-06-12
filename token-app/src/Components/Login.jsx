@@ -42,7 +42,7 @@ function Login() {
     }
     else
     {
-      navigate("/")
+      navigate("/login")
     }
   },[isAuth])
 

@@ -14,10 +14,13 @@ function NavbarStrip() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
+                
+                <NavLink to="/login">Login</NavLink>
                 <NavLink to="/register">Ragister</NavLink>
                 <NavLink to="/about">About US</NavLink>
                 <NavLink to="/contact">Contact US</NavLink>
-                <NavLink to="/">Logout</NavLink>
+                
+                
               </Nav>
             </Navbar.Collapse>
           </Container>

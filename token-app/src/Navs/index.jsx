@@ -1,5 +1,6 @@
 import React,{useContext} from 'react'
 import { BrowserRouter,Route,Routes,Navigate, Outlet,useLocation,NavLink as Link  } from 'react-router-dom'
+import LandingPage from '../Components/LandingPage'
 import Login from '../Components/Login'
 import User from '../Components/User'
 import Admin from '../Components/Admin'
@@ -19,9 +20,11 @@ function Navs() {
   // Redirect based on login type 
 
   const AdminRoute = () => {
+    console.log("in admin");
     return  isAuth? <Admin/> : <Navigate to="/" />;
   };
   const UserRoute = () => {
+     console.log("in user");
     return logintype === 'user' ? <User/> : <Navigate to="/" />;
   };
 
@@ -31,12 +34,13 @@ function Navs() {
     <BrowserRouter>
      <NavbarStrip/>
         <Routes>
-            <Route exact strict path="/" element={<Login/>} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/user" element={<UserRoute/>}/>
-            <Route path="/admin" element={ <AdminRoute/>}/>
+            <Route exact strict path="/" element={<LandingPage/>} />
+            <Route exact path="/login" element={<Login/>} />
+            <Route exact path="/register" element={<Register/>} />
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/contact" element={<ContactUs />} />
+            <Route exact path="/user" element={<UserRoute/>}/>
+            <Route exact path="/admin" element={ <AdminRoute/>}/>
         </Routes>
 
 

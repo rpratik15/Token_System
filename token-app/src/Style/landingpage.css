@@ -41,17 +41,19 @@
 
 .info-card{
   background: #FFFFFF;
-  box-shadow: 0px 1px 4px rgb(0 0 0 / 25%);
+  box-shadow: 2px 1px 4px rgba(243, 146, 146, 0.25);
   border-radius: 20px;
-  padding: 10px;
+  border: 1px rgb(219, 217, 217) solid;
+  padding: 25px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin: 10px;
+  margin: 35px;
+  height: 150px !important;
 }
 .info-card img{
-  width: 30px;
+  width: 60px;
   /* height: 100px;
   border-radius: 50%;
   object-fit: cover; */

@@ -9,7 +9,7 @@ import ContactUs from '../Components/ContactUs'
 import { UserContext } from '../Context/userContext'
 import NavbarStrip from './NavbarStrip'
 import Register from '../Components/Register'
-
+import Footer from '../Components/Footer'
 
 
 function Navs() {
@@ -42,7 +42,7 @@ function Navs() {
             <Route exact path="/user" element={<UserRoute/>}/>
             <Route exact path="/admin" element={ <AdminRoute/>}/>
         </Routes>
-
+<Footer/>
 
 </BrowserRouter> 
 </>   

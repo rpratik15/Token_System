@@ -17,8 +17,8 @@ function NavbarStrip() {
                 
                 <NavLink to="/login">Login</NavLink>
                 <NavLink to="/register">Ragister</NavLink>
-                <NavLink to="/about">About US</NavLink>
-                <NavLink to="/contact">Contact US</NavLink>
+                {/* <NavLink to="/about">About US</NavLink>
+                <NavLink to="/contact">Contact US</NavLink> */}
                 
                 
               </Nav>

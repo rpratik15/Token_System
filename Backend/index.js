@@ -5,7 +5,7 @@ const express = require('express');//import the required package
 const app = express();
 const mongoose=require("mongoose")
 const tokenRoutes = require('./Routes/tokenRoutes.js');//import the routes
-const Users = require('./DBModel/model.js');//import the user model
+const Users = require('./DBModel/Tokenmodel.js');//import the user model
 app.use(cors());
 app.use(express.json())// Parse JSON bodies (as sent by API clients)
 const path = require('path');

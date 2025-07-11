@@ -181,9 +181,10 @@ toast.promise( async () => {
       </form>
       <hr className="divider" />
       <h2>Token Information</h2>
+      {console.log(tokenList)}
       <div className="token-info">
             {
-
+              
               tokenList.map((token,index)=>{
                
                 return (

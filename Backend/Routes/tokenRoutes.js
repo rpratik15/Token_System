@@ -3,7 +3,7 @@ const cors = require("cors");
 const express = require('express');//import the required package
 const router = express();
 const mongoose=require("mongoose")
-const Token = require('../DBModel/model.js');//import the model
+const Token = require('../DBModel/Tokenmodel.js');//import the model
 const bodyParser = require("body-parser");
 router.use(express.json());
 //router.use(express.urlencoded({ extended: true }));
@@ -24,6 +24,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 router.get('/get', async (req, res) => {
     try {
+        console.log(Token);
         const tokens = await Token.find();
         
         if (tokens.length === 0) {

@@ -19,7 +19,7 @@ function Login() {
     if(user === "admin" && pass === "admin"){
       dispatch({type:"SET_LOGIN_TYPE",payload:"admin"})
 
-    }else if(user === "user" && pass === "user"){
+    }else if(checkUser(e)){
 
       dispatch({type:"SET_LOGIN_TYPE",payload:"user"})
 
@@ -27,7 +27,12 @@ function Login() {
       alert("Invalid username or password")
     }
   }
-
+const checkUser=(e)=>{
+  const user = e.target.user.value
+ const pass = e.target.password.value
+  if(user === "user" && pass === "user"){
+    return true
+   }}
   useEffect(()=>{
     if(isAuth)
     {
